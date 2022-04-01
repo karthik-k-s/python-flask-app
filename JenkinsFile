@@ -43,6 +43,7 @@ pipeline {
         stage('Deploy to Kubernetes') {
             steps {
                 echo 'Deploy the App using Ansible'
+                sh "sed -i 's/TAG/$BUILD_NUMBER/g' deployment.yml"
                 sh "kubectl apply -f deployment.yml"
             }
         }
